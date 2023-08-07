@@ -3,9 +3,11 @@ pipeline {
   stages {
     stage("build") {
       steps {
-        echo "building the application for production env"
-        withGradle() {
-          sh './gradle -v'
+        echo "building the application for prod"
+        NodeJS('Node20.5') {
+          sh 'npm install'
+          sh 'yarn install'
+          sh 'yarn -v'
         }
       }
     }
