@@ -23,7 +23,7 @@ pipeline {
         echo "testing version ${NEW_VERSION}" // should be in double quotes only to interrogate the var as string
         // gradle wrapper
         withGradle() {
-          sh './gradlew -v'
+          // sh './gradlew -v'
         }
       }
     }
