@@ -14,6 +14,9 @@ pipeline {
     stage("test") {
       steps {
         echo "testing the application"
+        withGradle() {
+          sh './gradlew -v'
+        }
       }
     }
     stage("deploy") {
