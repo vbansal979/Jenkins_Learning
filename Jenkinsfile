@@ -3,7 +3,10 @@ pipeline {
   stages {
     stage("build") {
       steps {
-        echo "building the application for production"
+        echo "building the application for production env"
+        withGradle() {
+          sh './gradle -v'
+        }
       }
     }
     stage("test") {
