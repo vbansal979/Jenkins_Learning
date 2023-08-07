@@ -1,11 +1,22 @@
 pipeline {
   agent any
+  parameters {
+    string(name: 'VERSION', defaultValue: '1.3.0', description: 'string parama')
+    choice(name: 'VERSION_PROD', choices: ['1.1.0', '1.2.0'], description: 'choice param')
+    booleanParam(name: 'executeTests', defaultValue: false , description: 'boolean param')
+  }
   environment {
     NEW_VERSION = '1.3.0'
     GITHUB_CRED = credentials('f3c1a5d7-dc8a-4dda-88e4-aac3f4347f4f')
   }
   stages {
     stage("build") {
+      // using params for conditionals
+      when {
+        expression {
+          params.executeTests
+        }
+      }
       steps {
         echo "building the application for prod"
         echo "build with creds ${GITHUB_CRED}"
@@ -41,6 +52,7 @@ pipeline {
           usernamePassword(credentialsId: 'f3c1a5d7-dc8a-4dda-88e4-aac3f4347f4f', usernameVariable: 'USER', passwordVariable: 'PWD')
         ]) {
           echo "user ${USER} password ${PWD}"
+          echo "version ${params.VERSION_PROD}"
         }
       }
     }
