@@ -2,7 +2,7 @@ node {
   stages {
     stage("build") {
       steps {
-        echo "building the application"
+        echo "building the application for production"
       }
     }
     stage("test") {
