@@ -22,9 +22,9 @@ pipeline {
         echo "testing the application"
         echo "testing version ${NEW_VERSION}" // should be in double quotes only to interrogate the var as string
         // gradle wrapper
-        withGradle() {
+        /*withGradle() {
           // sh './gradlew -v'
-        }
+        }*/
       }
     }
     stage("deploy") {
