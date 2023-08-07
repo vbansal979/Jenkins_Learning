@@ -38,7 +38,7 @@ pipeline {
       steps {
         echo "deploying the application on prod"
         withCredentials([
-          usernamePassword(credentials: 'f3c1a5d7-dc8a-4dda-88e4-aac3f4347f4f', usernameVar: USER, passwordVar: PWD)
+          usernamePassword(credentials: 'f3c1a5d7-dc8a-4dda-88e4-aac3f4347f4f', usernameVariable: USER, passwordVariable: PWD)
         ]) {
           echo "user ${USER} password ${PWD}"
         }
