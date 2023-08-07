@@ -4,7 +4,7 @@ pipeline {
     stage("build") {
       steps {
         echo "building the application for prod"
-        NodeJS('Node20.5') {
+        nodejs('Node10.17') {
           sh 'npm install'
           sh 'yarn install'
           sh 'yarn -v'
