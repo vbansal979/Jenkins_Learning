@@ -30,7 +30,10 @@ pipeline {
       }
       steps {
         echo "building the application for prod"
-        gv.buildApp()
+        script {
+          gv.buildApp()
+        }
+        
         echo "build with creds ${GITHUB_CRED}"
         // nodejs wrapper
         nodejs('Node10.17') {
@@ -43,7 +46,9 @@ pipeline {
     stage("test") {
       steps {
         echo "testing the application"
-        gv.testApp()
+        script {
+          gv.testApp()
+        }
         echo "testing version ${NEW_VERSION}" // should be in double quotes only to interrogate the var as string
         // invoke gradle script
         sh 'gradle -v'
@@ -59,7 +64,9 @@ pipeline {
       }
       steps {
         echo "deploying the application on prod"
-        gv.deployApp()
+        script {
+          gv.deployApp()
+        }
         withCredentials([
           usernamePassword(credentialsId: 'f3c1a5d7-dc8a-4dda-88e4-aac3f4347f4f', usernameVariable: 'USER', passwordVariable: 'PWD')
         ]) {
