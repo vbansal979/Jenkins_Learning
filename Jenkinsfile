@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  tools {
+    gradle 'Gradle8.2'
+  }
   parameters {
     string(name: 'VERSION', defaultValue: '1.3.0', description: 'string parama')
     choice(name: 'VERSION_PROD', choices: ['1.1.0', '1.2.0'], description: 'choice param')
@@ -32,10 +35,8 @@ pipeline {
       steps {
         echo "testing the application"
         echo "testing version ${NEW_VERSION}" // should be in double quotes only to interrogate the var as string
-        // gradle wrapper
-        withGradle() {
-         sh 'gradle -v'
-        }
+        // invoke gradle script
+        sh 'gradle -v'
       }
     }
     stage("deploy") {
